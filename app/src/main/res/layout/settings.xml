@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/home_button"
+        android:layout_width="135dp"
+        android:layout_height="64dp"
+        android:text="Übersicht"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="668dp" />
+
+    <Button
+        android:id="@+id/settings_button"
+        android:layout_width="135dp"
+        android:layout_height="64dp"
+        android:text="Einstellungen"
+        tools:layout_editor_absoluteX="273dp"
+        tools:layout_editor_absoluteY="668dp" />
+
+    <Button
+        android:id="@+id/claim_button"
+        android:layout_width="135dp"
+        android:layout_height="64dp"
+        android:text="Beantragen"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="668dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="410dp"
+        android:layout_height="619dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:clickable="true"
+            android:contextClickable="false"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/settings_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="40dp"
+            android:text="Einstellungen"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/lastname_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="text"
+            android:text="Nachname" />
+
+        <EditText
+            android:id="@+id/surname_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="text"
+            android:text="Vorname" />
+
+        <EditText
+            android:id="@+id/IBAN_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="text"
+            android:text="IBAN" />
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Einstellungen ändern" />
+
+        <Switch
+            android:id="@+id/darkmode_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingTop="20pt"
+            android:text="Darkmode" />
+
+        <TextView
+            android:id="@+id/imprint_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingTop="40pt"
+            android:text="Impressum"
+            android:textColor="#0099FF" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
