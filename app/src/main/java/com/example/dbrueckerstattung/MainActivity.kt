@@ -15,7 +15,7 @@ import com.example.dbrueckerstattung.ui.theme.DBRueckerstattungTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.dashboard)
+        setContentView(R.layout.settings)
     }
 }
 

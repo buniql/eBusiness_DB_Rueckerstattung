@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,65 +10,66 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Weiter"
-            tools:layout_editor_absoluteX="161dp"
-            tools:layout_editor_absoluteY="491dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/login_name_input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center"
-            android:inputType="text"
-            android:text="Nachname"
-            tools:layout_editor_absoluteX="100dp"
-            tools:layout_editor_absoluteY="303dp" />
+            <TextView
+                android:id="@+id/login_header"
+                android:layout_width="191dp"
+                android:layout_height="47dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="100pt"
+                android:gravity="center"
+                android:text="Registrieren"
+                android:textSize="34sp"
+                android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/login_name_input2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center"
-            android:inputType="text"
-            android:text="Vorname"
-            tools:layout_editor_absoluteX="100dp"
-            tools:layout_editor_absoluteY="357dp" />
+            <EditText
+                android:id="@+id/login_name_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="text"
+                android:text="Nachname" />
 
-        <EditText
-            android:id="@+id/login_name_input3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center"
-            android:inputType="text"
-            android:text="IBAN"
-            tools:layout_editor_absoluteX="100dp"
-            tools:layout_editor_absoluteY="411dp" />
+            <EditText
+                android:id="@+id/login_name_input2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="text"
+                android:text="Vorname" />
 
-        <TextView
-            android:id="@+id/agb_header"
-            android:layout_width="191dp"
-            android:layout_height="47dp"
-            android:gravity="center"
-            android:text="Registrieren"
-            android:textSize="34sp"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="110dp"
-            tools:layout_editor_absoluteY="129dp" />
+            <EditText
+                android:id="@+id/login_name_input3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="text"
+                android:text="IBAN" />
 
-        <CheckBox
-            android:id="@+id/AGB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="AGB"
-            tools:layout_editor_absoluteX="176dp"
-            tools:layout_editor_absoluteY="459dp" />
+            <CheckBox
+                android:id="@+id/AGB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="AGB" />
+
+            <Button
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Weiter" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

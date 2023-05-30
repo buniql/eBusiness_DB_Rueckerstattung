@@ -5,46 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/home_button"
-        android:layout_width="135dp"
-        android:layout_height="64dp"
-        android:text="Übersicht"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="668dp" />
-
-    <Button
-        android:id="@+id/settings_button"
-        android:layout_width="135dp"
-        android:layout_height="64dp"
-        android:text="Einstellungen"
-        tools:layout_editor_absoluteX="273dp"
-        tools:layout_editor_absoluteY="668dp" />
-
-    <Button
-        android:id="@+id/claim_button"
-        android:layout_width="135dp"
-        android:layout_height="64dp"
-        android:text="Beantragen"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="668dp" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="410dp"
-        android:layout_height="619dp"
+        android:layout_width="408dp"
+        android:layout_height="729dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="left"
             android:clickable="true"
             android:contextClickable="false"
-            tools:src="@tools:sample/avatars" />
+            android:src="@drawable/logo" />
 
         <TextView
             android:id="@+id/settings_text"
@@ -70,8 +46,33 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10pt"
+            android:layout_marginBottom="120pt"
             android:gravity="center"
             android:text="DB Navigator" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/claim_button"
+                android:layout_width="135dp"
+                android:layout_height="64dp"
+                android:text="Beantragen" />
+
+            <Button
+                android:id="@+id/home_button"
+                android:layout_width="135dp"
+                android:layout_height="64dp"
+                android:text="Übersicht" />
+
+            <Button
+                android:id="@+id/settings_button"
+                android:layout_width="135dp"
+                android:layout_height="64dp"
+                android:text="Einstellungen" />
+        </LinearLayout>
 
     </LinearLayout>
 
