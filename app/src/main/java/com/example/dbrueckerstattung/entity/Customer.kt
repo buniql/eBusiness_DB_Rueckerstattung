@@ -9,12 +9,18 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "customer_table",
     foreignKeys = [ForeignKey(
     entity = Address::class,
-    parentColumns = arrayOf("id"),
-    childColumns = arrayOf("address_fk")
-)])
+    parentColumns = arrayOf("address_fk"),
+    childColumns = arrayOf("id")
+    ),
+    ForeignKey(
+        entity = Refund::class,
+        parentColumns = arrayOf("refund_fk"),
+        childColumns = arrayOf("id")
+    )])
 data class Customer(
     @PrimaryKey(autoGenerate = true) val id: Int?,
     @ColumnInfo(name = "address_fk") val address_fk: Int?,
+    @ColumnInfo(name = "refund_fk") val refund_fk: Int?,
     @ColumnInfo(name = "first_name") val first_name: String?,
     @ColumnInfo(name = "last_name") val last_name: String?,
     @ColumnInfo(name = "email") val email: Email?,

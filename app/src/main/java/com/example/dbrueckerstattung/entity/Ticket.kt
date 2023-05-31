@@ -1,6 +1,5 @@
 package com.example.dbrueckerstattung.entity
 
-import android.provider.ContactsContract
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey

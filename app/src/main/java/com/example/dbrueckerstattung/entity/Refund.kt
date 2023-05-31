@@ -1,6 +1,5 @@
 package com.example.dbrueckerstattung.entity
 
-import android.provider.ContactsContract
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -10,15 +9,14 @@ import java.util.Date
 @Entity(tableName = "refund_table",
     foreignKeys = [ForeignKey(
         entity = Customer::class,
-        parentColumns = arrayOf("id"),
-        childColumns = arrayOf("customer_fk")
+        parentColumns = arrayOf("customer_fk"),
+        childColumns = arrayOf("id")
     ),
     ForeignKey(
         entity = Ticket::class,
-        parentColumns = arrayOf("id"),
-        childColumns = arrayOf("ticket_fk")
-    )
-    ])
+        parentColumns = arrayOf("ticket_fk"),
+        childColumns = arrayOf("id")
+    )])
 data class Refund (
     @PrimaryKey(autoGenerate = true) val id: Int?,
     @ColumnInfo(name = "customer_fk") val customer_fk: Int?,
