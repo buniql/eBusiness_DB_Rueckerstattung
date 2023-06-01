@@ -10,12 +10,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.dbrueckerstattung.database.AppDatabase
 import com.example.dbrueckerstattung.ui.theme.DBRueckerstattungTheme
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var appDb : AppDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings)
+
+        appDb = AppDatabase.getDatabase(this)
     }
 }
 
