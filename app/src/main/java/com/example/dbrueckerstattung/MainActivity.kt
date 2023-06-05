@@ -2,15 +2,13 @@ package com.example.dbrueckerstattung
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.dbrueckerstattung.database.AppDatabase
+import com.example.dbrueckerstattung.database.CustomerDao
+import com.example.dbrueckerstattung.entity.Customer
 import com.example.dbrueckerstattung.ui.theme.DBRueckerstattungTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,13 +19,17 @@ class MainActivity : ComponentActivity() {
         setContentView(R.layout.settings)
 
         appDb = AppDatabase.getDatabase(this)
+
+        appDb.customerDao().insert( Customer(1,1,1,"Max","Mustermann",
+            "super@email.com", "p","123456","DE123"))
     }
+
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting(modifier: Modifier = Modifier) {
     Text(
-            text = "Hello $name!",
+            text = "Hello ${CustomerDao.getAll()} Test 1 Test!",
             modifier = modifier
     )
 }
@@ -36,6 +38,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     DBRueckerstattungTheme {
-        Greeting("Android")
+        Greeting()
     }
 }
