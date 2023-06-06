@@ -17,21 +17,28 @@
 
             <TextView
                 android:id="@+id/login_header"
-                android:layout_width="290dp"
-                android:layout_height="132dp"
+                android:layout_width="347dp"
+                android:layout_height="151dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="100pt"
                 android:gravity="center"
-                android:text="Deine Registrierung ist abgeschlossen!"
+                android:text="Impressum"
                 android:textSize="34sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/agb_content"
+                android:layout_width="360dp"
+                android:layout_height="427dp"
+                android:layout_gravity="center"
+                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet." />
 
             <Button
                 android:id="@+id/button_to_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Los gehts!" />
+                android:text="Zurück" />
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

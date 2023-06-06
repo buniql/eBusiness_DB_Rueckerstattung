@@ -16,40 +16,22 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/login_header"
-                android:layout_width="191dp"
-                android:layout_height="47dp"
+                android:id="@+id/claim_successful"
+                android:layout_width="290dp"
+                android:layout_height="132dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="100pt"
-                android:text="Registrieren"
+                android:gravity="center"
+                android:text="Antrag eingereicht"
                 android:textSize="34sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/login_name_input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10pt"
-                android:ems="10"
-                android:inputType="text"
-                android:text="E-Mail" />
-
-            <EditText
-                android:id="@+id/login_password_input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:inputType="textPassword" />
-
             <Button
-                android:id="@+id/button_to_register2"
+                android:id="@+id/button_to_dashboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10pt"
-                android:text="Weiter" />
+                android:text="Zurück" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
