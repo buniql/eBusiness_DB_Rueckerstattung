@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,23 +16,23 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/login_header"
-                android:layout_width="290dp"
-                android:layout_height="132dp"
+            <ImageView
+                android:id="@+id/mockCameraImage"
+                android:layout_width="363dp"
+                android:layout_height="667dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="100pt"
-                android:gravity="center"
-                android:text="Deine Registrierung ist abgeschlossen!"
-                android:textSize="34sp"
-                android:textStyle="bold" />
+                android:scaleX="1"
+                android:scaleY="1"
+                android:src="@drawable/imagescan" />
 
-            <Button
-                android:id="@+id/button_to_login"
+            <ImageView
+                android:id="@+id/cameraButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Los gehts!" />
+                android:clickable="true"
+                android:src="@drawable/cameraicon"
+                tools:ignore="SpeakableTextPresentCheck" />
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -56,7 +56,7 @@
                 android:inputType="textPassword" />
 
             <TextView
-                android:id="@+id/login_register"
+                android:id="@+id/textView_to_register1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -64,7 +64,7 @@
                 android:textColor="#0099FF" />
 
             <TextView
-                android:id="@+id/login_forgot_password"
+                android:id="@+id/textView_to_forgotpw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -73,14 +73,14 @@
                 android:textColor="#0099FF" />
 
             <Button
-                android:id="@+id/login_button"
+                android:id="@+id/button_to_dashboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Login" />
 
             <TextView
-                android:id="@+id/imprint"
+                android:id="@+id/textView_to_imprintlogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

@@ -13,7 +13,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:scaleX="1.2"
+            android:scaleY="1.2">
 
             <TextView
                 android:id="@+id/login_header"
@@ -56,15 +58,40 @@
                 android:inputType="text"
                 android:text="IBAN" />
 
-            <CheckBox
-                android:id="@+id/AGB"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="AGB" />
+                android:orientation="horizontal"
+                android:scaleX="1"
+                android:scaleY="1">
+
+                <CheckBox
+                    android:id="@+id/AGB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="3pt"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <TextView
+                    android:id="@+id/agb_text"
+                    android:layout_width="20pt"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    android:text="AGB"
+                    android:textColor="#0099FF"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
 
             <Button
-                android:id="@+id/login_button"
+                android:id="@+id/button_to_register3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

@@ -17,11 +17,11 @@
 
             <TextView
                 android:id="@+id/login_header"
-                android:layout_width="191dp"
+                android:layout_width="wrap_content"
                 android:layout_height="47dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="100pt"
-                android:text="Registrieren"
+                android:text="Gib deine E-Mail an"
                 android:textSize="34sp"
                 android:textStyle="bold" />
 
@@ -35,16 +35,8 @@
                 android:inputType="text"
                 android:text="E-Mail" />
 
-            <EditText
-                android:id="@+id/login_password_input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:inputType="textPassword" />
-
             <Button
-                android:id="@+id/button_to_register2"
+                android:id="@+id/button_to_resetnotify"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
