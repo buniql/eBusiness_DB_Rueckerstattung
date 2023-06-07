@@ -15,12 +15,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.dbrueckerstattung.database.AppDatabase
+import com.example.dbrueckerstattung.entity.Customer
 import com.example.dbrueckerstattung.ui.theme.DBRueckerstattungTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadLogin()
+        var appDb = AppDatabase.getDatabase(this)
+
+        appDb.customerDao().insert( Customer(1,1,1,"Max","Mustermann",
+            "super@email.com", "p","123456","DE123")
+        )
     }
 
     private fun loadLogin() {
@@ -139,7 +146,7 @@ class MainActivity : ComponentActivity() {
         }
 
         settingsButton.setOnClickListener {
-            loadSettings()
+            //loadSettings()
         }
     }
 
@@ -156,7 +163,7 @@ class MainActivity : ComponentActivity() {
             loadDashboard()
         }
         settingsButton.setOnClickListener {
-            loadSettings()
+            //loadSettings()
         }
         photoButton.setOnClickListener {
             loadScan()
@@ -184,15 +191,6 @@ class MainActivity : ComponentActivity() {
         backToDashboardButton.setOnClickListener {
             loadDashboard()
         }
-    }
-
-    private fun loadSettings() {
-        setContentView(R.layout.settings)
-
-        appDb = AppDatabase.getDatabase(this)
-
-        appDb.customerDao().insert( Customer(1,1,1,"Max","Mustermann",
-            "super@email.com", "p","123456","DE123"))
     }
 }
 
