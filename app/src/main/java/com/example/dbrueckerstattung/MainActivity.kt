@@ -7,27 +7,22 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.dbrueckerstattung.database.AppDatabase
-import com.example.dbrueckerstattung.entity.Customer
 import com.example.dbrueckerstattung.ui.theme.DBRueckerstattungTheme
+import java.io.InputStream
+import java.io.File
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadLogin()
-        var appDb = AppDatabase.getDatabase(this)
 
-        appDb.customerDao().insert( Customer(1,1,1,"Max","Mustermann",
-            "super@email.com", "p","123456","DE123")
-        )
+        var daten = "daten.csv"
+        val inputstream = File(daten).inputStream()
+        readCsv(inputstream)
     }
 
     private fun loadLogin() {
@@ -136,6 +131,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun loadDashboard() {
+
         setContentView(R.layout.dashboard)
 
         var claimButton: Button = findViewById(R.id.botton_to_claim)
@@ -146,8 +142,19 @@ class MainActivity : ComponentActivity() {
         }
 
         settingsButton.setOnClickListener {
-            //loadSettings()
+            loadSettings()
         }
+    }
+
+    fun readCsv(inputStream: InputStream): List<KundenDaten> {
+        val reader = inputStream.bufferedReader()
+        val header = reader.readLine()
+        return reader.lineSequence()
+            .filter { it.isNotBlank() }
+            .map {
+                val (ID, Verspaetung, Rueckerstattungsbetrag) = it.split(';', ignoreCase = false, limit = 5)
+                KundenDaten(ID.trim().toInt(), Verspaetung.trim().toString(), Rueckerstattungsbetrag.trim().toDouble())
+            }.toList()
     }
 
     private fun loadClaim() {
@@ -163,7 +170,7 @@ class MainActivity : ComponentActivity() {
             loadDashboard()
         }
         settingsButton.setOnClickListener {
-            //loadSettings()
+            loadSettings()
         }
         photoButton.setOnClickListener {
             loadScan()
@@ -192,7 +199,36 @@ class MainActivity : ComponentActivity() {
             loadDashboard()
         }
     }
+
+    private fun loadSettings() {
+
+
+
+        setContentView(R.layout.settings)
+
+        var claimButton: Button = findViewById(R.id.botton_to_claim)
+        var dashboardButton: Button = findViewById(R.id.button_to_dashboard)
+        var submitButton: Button = findViewById(R.id.button_to_submit)
+
+        dashboardButton.setOnClickListener {
+            loadDashboard()
+        }
+
+        claimButton.setOnClickListener {
+            loadClaim()
+        }
+
+        submitButton.setOnClickListener {
+            loadSettings()
+        }
+    }
 }
+
+data class KundenDaten(
+    val ID: Int,
+    val Verspaetung: String,
+    val Rueckerstattungsbetrag: Double,
+)
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
