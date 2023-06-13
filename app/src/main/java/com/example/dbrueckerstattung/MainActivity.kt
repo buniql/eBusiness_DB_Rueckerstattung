@@ -12,11 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.dbrueckerstattung.ui.theme.DBRueckerstattungTheme
+import java.io.InputStream
+import java.io.File
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadLogin()
+
+        var daten = "daten.csv"
+        val inputstream = File(daten).inputStream()
+        readCsv(inputstream)
     }
 
     private fun loadLogin() {
@@ -125,6 +131,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun loadDashboard() {
+
         setContentView(R.layout.dashboard)
 
         var claimButton: Button = findViewById(R.id.botton_to_claim)
@@ -137,6 +144,17 @@ class MainActivity : ComponentActivity() {
         settingsButton.setOnClickListener {
             loadSettings()
         }
+    }
+
+    fun readCsv(inputStream: InputStream): List<KundenDaten> {
+        val reader = inputStream.bufferedReader()
+        val header = reader.readLine()
+        return reader.lineSequence()
+            .filter { it.isNotBlank() }
+            .map {
+                val (ID, Verspaetung, Rueckerstattungsbetrag) = it.split(';', ignoreCase = false, limit = 5)
+                KundenDaten(ID.trim().toInt(), Verspaetung.trim().toString(), Rueckerstattungsbetrag.trim().toDouble())
+            }.toList()
     }
 
     private fun loadClaim() {
@@ -183,6 +201,9 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun loadSettings() {
+
+
+
         setContentView(R.layout.settings)
 
         var claimButton: Button = findViewById(R.id.botton_to_claim)
@@ -203,7 +224,11 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
+data class KundenDaten(
+    val ID: Int,
+    val Verspaetung: String,
+    val Rueckerstattungsbetrag: Double,
+)
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
