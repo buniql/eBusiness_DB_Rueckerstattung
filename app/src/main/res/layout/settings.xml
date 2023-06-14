@@ -14,13 +14,10 @@
         tools:layout_editor_absoluteY="1dp">
 
         <ImageView
-            android:id="@+id/logo"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="left"
-            android:clickable="true"
-            android:contextClickable="false"
-            tools:src="@drawable/logo" />
+            android:id="@+id/imageView4"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            app:srcCompat="@drawable/DB_Cashback1" />
 
         <TextView
             android:id="@+id/settings_text"
