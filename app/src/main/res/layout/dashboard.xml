@@ -11,7 +11,8 @@
         android:layout_height="731dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="1dp">
+        tools:layout_editor_absoluteX="1dp"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/settings_text"
@@ -27,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="73,98€"
+            android:text=" "
             android:textSize="24sp" />
 
         <TextView
@@ -45,6 +46,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:gravity="center"
+            android:minHeight="48dp"
             android:text="#123 wird bearbeitet 0,98€"
             android:textSize="18sp" />
 
@@ -54,6 +56,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:gravity="center"
+            android:minHeight="48dp"
             android:text="#123 wird bearbeitet 0,98€"
             android:textSize="18sp" />
 
@@ -63,6 +66,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:gravity="center"
+            android:minHeight="48dp"
             android:text="#123 wird bearbeitet 0,98€"
             android:textSize="18sp" />
 

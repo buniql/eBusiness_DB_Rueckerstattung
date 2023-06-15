@@ -12,17 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.dbrueckerstattung.ui.theme.DBRueckerstattungTheme
+import org.apache.commons.csv.CSVFormat
+import org.apache.commons.csv.CSVParser
+import java.io.BufferedReader
 import java.io.InputStream
-import java.io.File
+import java.io.InputStreamReader
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadLogin()
-
-        var daten = "daten.csv"
-        val inputstream = File(daten).inputStream()
-        readCsv(inputstream)
     }
 
     private fun loadLogin() {
@@ -132,7 +132,37 @@ class MainActivity : ComponentActivity() {
 
     private fun loadDashboard() {
 
+
         setContentView(R.layout.dashboard)
+        //nehme hier beispielweise das textfeld refunded_sum aus der dashboard.xml
+        //schreibe weiter unten alles daten in das textfeld
+        //mann müsste in das feld nur addiert den betrag reinschreiben
+        val textView = findViewById<TextView>(R.id.refunded_sum)
+        val minput = InputStreamReader(assets.open("db.csv"))
+        val reader = BufferedReader(minput)
+        val csvParser = CSVParser.parse(
+            reader,
+            CSVFormat.DEFAULT
+        )
+        val list= mutableListOf<daten>()
+        //hier wird die csv datei ausgelesen und in eine liste gespeichert
+        csvParser.forEach(){
+            it?.let {
+                val daten = daten(
+                    id =it.get(0),
+                    verspeatung = it.get(1),
+                    betrag = it.get(2)
+                )
+                list.add(daten)
+            }
+        }
+        //hier werden die listeneinträge an das oben definierte Textfeld reingeschrieben
+        //in dem unten stehenden Format um zu zeigen dass alles da ist
+        list.forEach{
+            textView.append(
+                "${it.id} ${it.betrag} ${it.verspeatung}\n"
+            )
+        }
 
         var claimButton: Button = findViewById(R.id.botton_to_claim)
         var settingsButton: Button = findViewById(R.id.button_to_settings)
@@ -155,6 +185,7 @@ class MainActivity : ComponentActivity() {
                 val (ID, Verspaetung, Rueckerstattungsbetrag) = it.split(';', ignoreCase = false, limit = 5)
                 KundenDaten(ID.trim().toInt(), Verspaetung.trim().toString(), Rueckerstattungsbetrag.trim().toDouble())
             }.toList()
+
     }
 
     private fun loadClaim() {
