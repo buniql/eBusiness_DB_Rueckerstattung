@@ -13,16 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.dbrueckerstattung.ui.theme.DBRueckerstattungTheme
 import java.io.InputStream
-import java.io.File
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadLogin()
 
-        var daten = "daten.csv"
-        val inputstream = File(daten).inputStream()
-        readCsv(inputstream)
+//        var daten = "daten.csv"
+//        val inputstream = File(daten).inputStream()
+//        readCsv(inputstream)
     }
 
     private fun loadLogin() {
@@ -136,6 +135,7 @@ class MainActivity : ComponentActivity() {
 
         var claimButton: Button = findViewById(R.id.botton_to_claim)
         var settingsButton: Button = findViewById(R.id.button_to_settings)
+        var detailListButton: Button = findViewById(R.id.button_to_detailList)
 
         claimButton.setOnClickListener {
             loadClaim()
@@ -143,6 +143,10 @@ class MainActivity : ComponentActivity() {
 
         settingsButton.setOnClickListener {
             loadSettings()
+        }
+
+        detailListButton.setOnClickListener{
+            loadDetailedList()
         }
     }
 
@@ -200,6 +204,9 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun loadDetailedList(){
+        setContentView(R.layout.refundlist)
+    }
     private fun loadSettings() {
 
 

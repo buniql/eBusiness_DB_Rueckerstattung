@@ -67,10 +67,10 @@
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/status_button"
+            android:id="@+id/button_to_detailList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button"
+            android:text="Details zu den Aufträgen"
             tools:text="Details zu den Aufträgen"
             tools:visibility="visible" />
 
