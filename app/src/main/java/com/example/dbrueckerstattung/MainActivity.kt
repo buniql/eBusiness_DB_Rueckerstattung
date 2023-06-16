@@ -159,9 +159,9 @@ class MainActivity : ComponentActivity() {
         val refundedSum = list.sumOf { it.betrag }
         refunded_sum_textView.text = "${refundedSum}€"
 
-        val lastThreeEntries = list.takeLast(3)
+        val lastEntries = list.takeLast(3)
 
-        lastThreeEntries.forEach {
+        lastEntries.forEach {
             status_textView.append(
                 "Auftrag ${it.id} wird bearbeitet mit dem Betrag: ${it.betrag} \n\n"
             )
