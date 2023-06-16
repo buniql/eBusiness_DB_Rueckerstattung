@@ -24,12 +24,4 @@ interface CustomerDao {
     @Query("DELETE FROM customer_table")
     suspend fun deleteAll()
 
-//    companion object {
-//        fun getAlls(): String {
-//            CustomerDao.insert( Customer(1,1,1,"Max","Mustermann",
-//                "super@email.com", "p","123456","DE123"))
-//            val Costumers = CustomerDao.getAll()
-//            return Costumers
-//        }
-//    }
 }
