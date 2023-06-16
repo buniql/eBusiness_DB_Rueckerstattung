@@ -41,34 +41,16 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/status1"
+            android:id="@+id/statuseinträge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:gravity="center"
             android:minHeight="48dp"
-            android:text="#123 wird bearbeitet 0,98€"
+            android:text=" "
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/status2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:gravity="center"
-            android:minHeight="48dp"
-            android:text="#123 wird bearbeitet 0,98€"
-            android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/status3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:gravity="center"
-            android:minHeight="48dp"
-            android:text="#123 wird bearbeitet 0,98€"
-            android:textSize="18sp" />
 
         <Button
             android:id="@+id/button_to_detailList"
@@ -88,11 +70,11 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/statistic"
+            android:id="@+id/statistiken_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="63% der Züge im letzten Monat waren nicht pünktlich"
+            android:text=""
             android:textSize="18sp" />
 
         <LinearLayout
