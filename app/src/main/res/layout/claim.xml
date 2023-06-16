@@ -13,6 +13,12 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            app:srcCompat="@drawable/DB_Cashback1" />
+
         <TextView
             android:id="@+id/settings_text"
             android:layout_width="match_parent"
