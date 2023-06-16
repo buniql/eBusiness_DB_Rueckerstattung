@@ -15,6 +15,7 @@ import com.example.dbrueckerstattung.ui.theme.DBRueckerstattungTheme
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
 import java.io.BufferedReader
+import java.io.File
 import java.io.InputStream
 import java.io.InputStreamReader
 
@@ -132,12 +133,10 @@ class MainActivity : ComponentActivity() {
 
     private fun loadDashboard() {
 
-
         setContentView(R.layout.dashboard)
-        //nehme hier beispielweise das textfeld refunded_sum aus der dashboard.xml
-        //schreibe weiter unten alles daten in das textfeld
-        //mann müsste in das feld nur addiert den betrag reinschreiben
-        val textView = findViewById<TextView>(R.id.refunded_sum)
+        val refunded_sum_textView = findViewById<TextView>(R.id.refunded_sum)
+        val status_textView = findViewById<TextView>(R.id.statuseinträge)
+        val statistik_textView = findViewById<TextView>(R.id.statistiken_text)
         val minput = InputStreamReader(assets.open("db.csv"))
         val reader = BufferedReader(minput)
         val csvParser = CSVParser.parse(
@@ -145,24 +144,36 @@ class MainActivity : ComponentActivity() {
             CSVFormat.DEFAULT
         )
         val list= mutableListOf<daten>()
-        //hier wird die csv datei ausgelesen und in eine liste gespeichert
-        csvParser.forEach(){
-            it?.let {
-                val daten = daten(
-                    id =it.get(0),
-                    verspeatung = it.get(1),
-                    betrag = it.get(2)
-                )
+
+        csvParser.forEach { record ->
+            val id = record.get(0)
+            val verspeatung = record.get(1)
+            val betrag = record.get(2).toDoubleOrNull()
+
+            if (id != null && verspeatung != null && betrag != null) {
+                val daten = daten(id, verspeatung, betrag)
                 list.add(daten)
             }
         }
-        //hier werden die listeneinträge an das oben definierte Textfeld reingeschrieben
-        //in dem unten stehenden Format um zu zeigen dass alles da ist
-        list.forEach{
-            textView.append(
-                "${it.id} ${it.betrag} ${it.verspeatung}\n"
+
+        val refundedSum = list.sumOf { it.betrag }
+        refunded_sum_textView.text = "${refundedSum}€"
+
+        val lastThreeEntries = list.takeLast(3)
+
+        lastThreeEntries.forEach { entry ->
+            println("ID: ${entry.id}, Verspätung: ${entry.verspeatung}, Betrag: ${entry.betrag}")
+        }
+        lastThreeEntries.forEach {
+            status_textView.append(
+                "Auftrag ${it.id} wird bearbeitet mit dem Betrag: ${it.betrag} \n\n"
             )
         }
+        val jaCount = list.count { it.verspeatung == "Ja" }
+        val prozentJa = jaCount.toDouble() / list.size * 100
+        statistik_textView.text = "${prozentJa.toInt()}% der Züge im letzten Monat waren nicht pünktlich"
+
+
 
         var claimButton: Button = findViewById(R.id.botton_to_claim)
         var settingsButton: Button = findViewById(R.id.button_to_settings)
@@ -174,18 +185,6 @@ class MainActivity : ComponentActivity() {
         settingsButton.setOnClickListener {
             loadSettings()
         }
-    }
-
-    fun readCsv(inputStream: InputStream): List<KundenDaten> {
-        val reader = inputStream.bufferedReader()
-        val header = reader.readLine()
-        return reader.lineSequence()
-            .filter { it.isNotBlank() }
-            .map {
-                val (ID, Verspaetung, Rueckerstattungsbetrag) = it.split(';', ignoreCase = false, limit = 5)
-                KundenDaten(ID.trim().toInt(), Verspaetung.trim().toString(), Rueckerstattungsbetrag.trim().toDouble())
-            }.toList()
-
     }
 
     private fun loadClaim() {
