@@ -15,8 +15,6 @@ import com.example.dbrueckerstattung.ui.theme.DBRueckerstattungTheme
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
 import java.io.BufferedReader
-import java.io.File
-import java.io.InputStream
 import java.io.InputStreamReader
 
 
@@ -175,6 +173,7 @@ class MainActivity : ComponentActivity() {
 
         var claimButton: Button = findViewById(R.id.botton_to_claim)
         var settingsButton: Button = findViewById(R.id.button_to_settings)
+        var refundlistButton: Button = findViewById(R.id.button_to_detailList)
 
         claimButton.setOnClickListener {
             loadClaim()
@@ -182,6 +181,10 @@ class MainActivity : ComponentActivity() {
 
         settingsButton.setOnClickListener {
             loadSettings()
+        }
+
+        refundlistButton.setOnClickListener{
+            loadDetailedList(list)
         }
     }
 
@@ -228,8 +231,27 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun loadDetailedList(){
+    private fun loadDetailedList(list:List<daten>){
         setContentView(R.layout.refundlist)
+
+        var dashboardButton: Button = findViewById(R.id.button_to_dashboard)
+
+        val refund_textView = findViewById<TextView>(R.id.refunds)
+        var status = "Abgeschlossen"
+        var count = 0
+        list.forEach {
+            refund_textView.append(
+                "Auftrag ${it.id} Status: ${status}\n Betrag: ${it.betrag}€ \n\n"
+            )
+            ++count
+            if (count > 16)
+                status = "in Bearbeitung"
+        }
+
+
+        dashboardButton.setOnClickListener {
+            loadDashboard()
+        }
     }
     private fun loadSettings() {
 
