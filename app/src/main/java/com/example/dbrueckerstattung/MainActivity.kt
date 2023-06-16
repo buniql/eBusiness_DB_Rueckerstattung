@@ -161,9 +161,6 @@ class MainActivity : ComponentActivity() {
 
         val lastThreeEntries = list.takeLast(3)
 
-        lastThreeEntries.forEach { entry ->
-            println("ID: ${entry.id}, Verspätung: ${entry.verspeatung}, Betrag: ${entry.betrag}")
-        }
         lastThreeEntries.forEach {
             status_textView.append(
                 "Auftrag ${it.id} wird bearbeitet mit dem Betrag: ${it.betrag} \n\n"
