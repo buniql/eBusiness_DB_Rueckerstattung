@@ -54,14 +54,14 @@
             android:gravity="center"
             android:minHeight="48dp"
             android:text=" "
-            android:textSize="18sp" />
-
+            android:textSize="16sp" />
 
 
         <Button
             android:id="@+id/button_to_detailList"
-            android:layout_width="match_parent"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Details zu den Aufträgen"
             tools:text="Details zu den Aufträgen"
             tools:visibility="visible" />
@@ -86,7 +86,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="238dp"
-            android:layout_marginTop="60pt"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <Button
