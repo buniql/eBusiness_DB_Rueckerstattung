@@ -17,7 +17,7 @@
             android:id="@+id/imageView4"
             android:layout_width="140dp"
             android:layout_height="140dp"
-            app:srcCompat="@drawable/db_cashback" />
+            android:src="@drawable/db_cashback" />
 
         <TextView
             android:id="@+id/settings_text"
@@ -91,12 +91,6 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button_to_settings"
-                android:layout_width="135dp"
-                android:layout_height="64dp"
-                android:text="Einstellungen" />
-
-            <Button
                 android:id="@+id/botton_to_claim"
                 android:layout_width="135dp"
                 android:layout_height="64dp"
@@ -107,6 +101,12 @@
                 android:layout_width="135dp"
                 android:layout_height="64dp"
                 android:text="Übersicht" />
+
+            <Button
+                android:id="@+id/button_to_settings"
+                android:layout_width="135dp"
+                android:layout_height="64dp"
+                android:text="Einstellungen" />
         </LinearLayout>
 
     </LinearLayout>
