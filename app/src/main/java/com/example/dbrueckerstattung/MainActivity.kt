@@ -136,7 +136,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun loadDashboard() {
-        
+
         //Verweis auf die XML-Datei dashboard.xml
         setContentView(R.layout.dashboard)
 
@@ -297,6 +297,8 @@ class MainActivity : ComponentActivity() {
 }
 
 data class KundenDaten(
+
+    // Data Class zum abspeichern der Daten, die aus der CSV-Datei eingelesen werden
     val ID: Int,
     val Verspaetung: String,
     val Rueckerstattungsbetrag: Double,
