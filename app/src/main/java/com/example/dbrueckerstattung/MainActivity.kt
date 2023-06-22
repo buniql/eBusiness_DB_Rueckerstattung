@@ -136,12 +136,16 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun loadDashboard() {
-
-
+        
+        //Verweis auf die XML-Datei dashboard.xml
         setContentView(R.layout.dashboard)
+
+        //Deklarierung der Variablen, die zum Anzeigen der Daten benötigt werden (mit Verlinkung)
         val refunded_sum_textView = findViewById<TextView>(R.id.refunded_sum)
         val status_textView = findViewById<TextView>(R.id.statuseinträge)
         val statistik_textView = findViewById<TextView>(R.id.statistiken_text)
+
+        //Daten werden aus der CSV-Datei ausgelesen
         val minput = InputStreamReader(assets.open("db.csv"))
         val reader = BufferedReader(minput)
         val csvParser = CSVParser.parse(
@@ -150,6 +154,7 @@ class MainActivity : ComponentActivity() {
         )
         val list= mutableListOf<daten>()
 
+        //Daten werden in der Data Class daten abgespeichert
         csvParser.forEach { record ->
             val id = record.get(0)
             val verspeatung = record.get(1)
@@ -161,34 +166,42 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+        //Aufsummierung der Beträge, die rückerstattet werden
         val refundedSum = list.sumOf { it.betrag }
         refunded_sum_textView.text = "${refundedSum}€"
 
+        //Die letzten 3 Einträge der Liste werden in der Variablen lastEntries gespeichert
         val lastEntries = list.takeLast(3)
 
+        //Die letzten 3 Einträge werden auf dem Dashboard ausgegeben
         lastEntries.forEach {
             status_textView.append(
                 "Auftrag ${it.id} wird bearbeitet mit dem Betrag: ${it.betrag} \n\n"
             )
         }
+
+        //Berechnung der prozentualen Anzahl an Verspätungen
         val jaCount = list.count { it.verspeatung == "Ja" }
         val prozentJa = jaCount.toDouble() / list.size * 100
         statistik_textView.text = "${prozentJa.toInt()}% der Züge im letzten Monat waren nicht pünktlich"
 
 
-
+        //Deklarierung der Variablen für die einzelnen Buttons (mit Verlinkung zu dashboard.xml)
         var claimButton: Button = findViewById(R.id.botton_to_claim)
         var settingsButton: Button = findViewById(R.id.button_to_settings)
         var refundlistButton: Button = findViewById(R.id.button_to_detailList)
 
+        //Festlegen, was beim klicken auf den Button "claimButton" passiert
         claimButton.setOnClickListener {
             loadClaim()
         }
 
+        //Festlegen, was beim klicken auf den Button "settingsButton" passiert
         settingsButton.setOnClickListener {
             loadSettings()
         }
 
+        //Festlegen, was beim klicken auf den Button "refundlistButton" passiert
         refundlistButton.setOnClickListener{
             loadDetailedList(list)
         }
