@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+// Entity wird über DAO auf DB gemappt
+// Jeder Kunde braucht anscheinend ne Adresse
 @Entity(tableName = "address_table")
 data class Address(
     @PrimaryKey(autoGenerate = true) val id: Int?,

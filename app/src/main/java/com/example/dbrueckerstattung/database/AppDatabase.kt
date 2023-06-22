@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.dbrueckerstattung.entity.Customer
 
+// Database für SQLite, implementiert als Singleton
 @Database(entities = [Customer :: class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 

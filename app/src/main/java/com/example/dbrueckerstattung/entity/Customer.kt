@@ -7,6 +7,8 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
+// Entity wird über DAO auf DB gemappt
+// Kunden sind endgeil, die bringen uns Cashmoney
 @Entity(tableName = "customer_table",
     foreignKeys = [ForeignKey(
     entity = Address::class,

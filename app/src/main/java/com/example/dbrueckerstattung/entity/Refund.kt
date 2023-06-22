@@ -6,6 +6,8 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.util.Date
 
+// Entity wird über DAO auf DB gemappt
+// Wenn die Deutsche Bahn kein Auge macht bekommen wir entsprechend die Erstattung
 @Entity(tableName = "refund_table",
     foreignKeys = [ForeignKey(
         entity = Customer::class,

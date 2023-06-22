@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey
 import java.math.BigDecimal
 import java.util.Date
 
+// Entity wird über DAO auf DB gemappt
+// Erstattungen gibts nur fuer Tickets
 @Entity(tableName = "ticket_table")
 data class Ticket(
     @PrimaryKey(autoGenerate = true) val id: Int?,
