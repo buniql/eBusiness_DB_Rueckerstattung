@@ -393,15 +393,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-data class KundenDaten(
-
-    // Data Class zum abspeichern der Daten, die aus der CSV-Datei eingelesen werden
-    val ID: Int,
-    val Verspaetung: String,
-    val Rueckerstattungsbetrag: Double,
-)
-
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
