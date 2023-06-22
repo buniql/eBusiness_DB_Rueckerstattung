@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.widget.doAfterTextChanged
 import com.example.dbrueckerstattung.ui.theme.DBRueckerstattungTheme
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
@@ -152,17 +153,21 @@ class MainActivity : ComponentActivity() {
 
         csvParser.forEach { record ->
             val id = record.get(0)
-            val verspeatung = record.get(1)
-            val betrag = record.get(2).toDoubleOrNull()
+            val von = record.get(1)
+            val nach = record.get(2)
+            val datum = record.get(3)
+            val status = record.get(4)
+            val verspeatung = record.get(5)
+            val betrag = record.get(6).toDoubleOrNull()
 
             if (id != null && verspeatung != null && betrag != null) {
-                val daten = daten(id, verspeatung, betrag)
+                val daten = daten(id, von, nach, datum, status, verspeatung, betrag)
                 list.add(daten)
             }
         }
 
         val refundedSum = list.sumOf { it.betrag }
-        refunded_sum_textView.text = "${refundedSum}€"
+        refunded_sum_textView.text = "${String.format("%.2f", refundedSum)}€"
 
         val lastEntries = list.takeLast(3)
 
@@ -242,18 +247,117 @@ class MainActivity : ComponentActivity() {
 
         var dashboardButton: Button = findViewById(R.id.button_to_dashboard)
 
-        val refund_textView = findViewById<TextView>(R.id.refunds)
-        var status = "Abgeschlossen"
-        var count = 0
+        var searchBox: EditText = findViewById(R.id.refundlist_search)
+        var sortByDateButton: Button = findViewById(R.id.sort_by_date)
+        var sortBySumButton: Button = findViewById(R.id.sort_by_sum)
+        var doneCheckbox: CheckBox = findViewById(R.id.checkbox_done)
+        var refund_textView = findViewById<TextView>(R.id.refunds)
+
+        var currentSearchString: String = ""
+        var currentCheckBoxState: Boolean = false
+
+        var sortedList: List<daten>
+
         list.forEach {
             refund_textView.append(
-                "Auftrag ${it.id} Status: ${status}\n Betrag: ${it.betrag}€ \n\n"
+                "Auftrag ${it.id}\n Von: ${it.von} Nach: ${it.nach} \n Datum: ${it.datum} \n" +
+                        " Status: ${it.status}\n Betrag: ${it.betrag}€ \n\n"
             )
-            ++count
-            if (count > 16)
-                status = "in Bearbeitung"
         }
 
+        searchBox.doAfterTextChanged { text ->
+            currentSearchString = text.toString();
+            refund_textView.setText("");
+            list.forEach {
+                if (it.von.contains(text.toString(), ignoreCase = true) || it.nach.contains(text.toString(), ignoreCase = true))
+                    refund_textView.append(
+                        "Auftrag ${it.id}\n Von: ${it.von} Nach: ${it.nach} \n Datum: ${it.datum} \n" +
+                                " Status: ${it.status}\n Betrag: ${it.betrag}€ \n\n"
+                    )
+            }
+        }
+
+        sortByDateButton.setOnClickListener {
+            refund_textView.setText("");
+
+            if(sortByDateButton.text.equals("Datum ASC")) {
+                sortedList = list.sortedWith(compareByDescending<daten> { it.datum.substring(6, 10) }
+                    .thenBy { it.datum.substring(3, 5) }
+                    .thenBy { it.datum.substring(0, 2) }
+                )
+                sortedList.forEach {
+                    if (it.von.contains(currentSearchString, ignoreCase = true) || it.nach.contains(currentSearchString, ignoreCase = true))
+                        refund_textView.append(
+                            "Auftrag ${it.id}\n Von: ${it.von} Nach: ${it.nach} \n Datum: ${it.datum} \n" +
+                                    " Status: ${it.status}\n Betrag: ${it.betrag}€ \n\n"
+                        )
+                }
+                sortByDateButton.setText("Datum DSC")
+            } else {
+                sortedList = list.sortedWith(compareBy<daten> { it.datum.substring(6, 10) }
+                    .thenBy { it.datum.substring(3, 5) }
+                    .thenBy { it.datum.substring(0, 2) }
+                )
+                sortedList.forEach {
+                    if (it.von.contains(currentSearchString, ignoreCase = true) || it.nach.contains(currentSearchString, ignoreCase = true))
+                        refund_textView.append(
+                            "Auftrag ${it.id}\n Von: ${it.von} Nach: ${it.nach} \n Datum: ${it.datum} \n" +
+                                    " Status: ${it.status}\n Betrag: ${it.betrag}€ \n\n"
+                        )
+                }
+                sortByDateButton.setText("Datum ASC")
+            }
+        }
+
+        sortBySumButton.setOnClickListener {
+            refund_textView.setText("");
+
+            if(sortBySumButton.text.equals("Betrag ASC")) {
+                sortedList = list.sortedBy {it.betrag}
+                sortedList.forEach {
+                    if (it.von.contains(currentSearchString, ignoreCase = true) || it.nach.contains(currentSearchString, ignoreCase = true))
+                        refund_textView.append(
+                            "Auftrag ${it.id}\n Von: ${it.von} Nach: ${it.nach} \n Datum: ${it.datum} \n" +
+                                    " Status: ${it.status}\n Betrag: ${it.betrag}€ \n\n"
+                        )
+                }
+                sortBySumButton.setText("Betrag DSC")
+            } else {
+                sortedList = list.sortedByDescending  {it.betrag}
+                sortedList.forEach {
+                    if (it.von.contains(currentSearchString, ignoreCase = true) || it.nach.contains(currentSearchString, ignoreCase = true))
+                        refund_textView.append(
+                            "Auftrag ${it.id}\n Von: ${it.von} Nach: ${it.nach} \n Datum: ${it.datum} \n" +
+                                    " Status: ${it.status}\n Betrag: ${it.betrag}€ \n\n"
+                        )
+                }
+                sortBySumButton.setText("Betrag ASC")
+            }
+        }
+
+        doneCheckbox.setOnClickListener {
+            currentCheckBoxState = doneCheckbox.isChecked;
+            refund_textView.setText("");
+
+            if(doneCheckbox.isChecked) {
+                list.forEach {
+                    if (it.von.contains(currentSearchString, ignoreCase = true) || it.nach.contains(currentSearchString, ignoreCase = true && it.status.equals("Abgeschlossen")))
+                        refund_textView.append(
+                            "Auftrag ${it.id}\n Von: ${it.von} Nach: ${it.nach} \n Datum: ${it.datum} \n" +
+                                    " Status: ${it.status}\n Betrag: ${it.betrag}€ \n\n"
+                        )
+                }
+            } else {
+                list.forEach {
+                    if (it.von.contains(currentSearchString, ignoreCase = true) || it.nach.contains(currentSearchString, ignoreCase = true))
+                    refund_textView.append(
+                        "Auftrag ${it.id}\n Von: ${it.von} Nach: ${it.nach} \n Datum: ${it.datum} \n" +
+                                " Status: ${it.status}\n Betrag: ${it.betrag}€ \n\n"
+                    )
+                }
+            }
+
+        }
 
         dashboardButton.setOnClickListener {
             loadDashboard()
