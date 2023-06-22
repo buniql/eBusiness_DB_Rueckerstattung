@@ -26,12 +26,6 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun loadLogin() {
-        //DB Initialisierung
-//        var appDb = AppDatabase.getDatabase(this)
-//
-//        appDb.customerDao().insert( Customer(1,1,1,"Max","Mustermann",
-//            "super@email.com", "p","123456","DE123")
-//        )
         setContentView(R.layout.login)
 
         var buttonToDashboard: Button = findViewById(R.id.button_to_dashboard)
