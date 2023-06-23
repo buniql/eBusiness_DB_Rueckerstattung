@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
 
         var userText: EditText = findViewById(R.id.login_name_input)
 
-        var pwText: EditText = findViewById(R.id.login_password_input)
+        var pwText: EditText = findViewById(R.id.login_password_input1)
 
         buttonToDashboard.setOnClickListener {
             if(!userText.text.toString().equals("E-Mail") && pwText.text.toString().equals("p")) {
@@ -394,6 +394,10 @@ class MainActivity : ComponentActivity() {
         var claimButton: Button = findViewById(R.id.botton_to_claim)
         var dashboardButton: Button = findViewById(R.id.button_to_dashboard)
         var submitButton: Button = findViewById(R.id.button_to_submit)
+
+        var userTextVorname: EditText = findViewById(R.id.surname_input)
+        var userTextNachname: EditText = findViewById(R.id.lastname_input)
+        var ibanText: EditText = findViewById(R.id.IBAN_input)
 
         dashboardButton.setOnClickListener {
             loadDashboard()
