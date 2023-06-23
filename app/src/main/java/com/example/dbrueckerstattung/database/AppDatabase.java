@@ -1,4 +1,4 @@
-package com.example.dbrueckerstattung;
+package com.example.dbrueckerstattung.database;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,6 +6,9 @@ import android.util.Log;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+
+import com.example.dbrueckerstattung.entity.Daten;
+import com.example.dbrueckerstattung.entity.DatenDao;
 
 @Database(entities = {Daten.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
