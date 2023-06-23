@@ -9,6 +9,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
+//DataAccessObject für die Daten aus der DB für die Rückerstattungen
 @Dao
 public interface DatenDao {
 

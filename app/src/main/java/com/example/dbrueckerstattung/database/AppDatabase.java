@@ -10,6 +10,7 @@ import androidx.room.RoomDatabase;
 import com.example.dbrueckerstattung.entity.Daten;
 import com.example.dbrueckerstattung.entity.DatenDao;
 
+//Room DB initialisierung
 @Database(entities = {Daten.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String LOG_TAG = AppDatabase.class.getSimpleName();
