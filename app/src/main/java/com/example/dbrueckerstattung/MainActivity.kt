@@ -15,6 +15,7 @@ import androidx.core.widget.doAfterTextChanged
 import com.example.dbrueckerstattung.database.AppDatabase
 import com.example.dbrueckerstattung.entity.Daten
 import com.example.dbrueckerstattung.entity.UserSingleton
+import com.example.dbrueckerstattung.tools.Tools
 import com.example.dbrueckerstattung.ui.theme.DBRueckerstattungTheme
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
@@ -67,12 +68,18 @@ class MainActivity : ComponentActivity() {
 
         var userText: EditText = findViewById(R.id.login_name_input)
 
-        var pwText: EditText = findViewById(R.id.login_password_input1)
+        var pwText: EditText = findViewById(R.id.login_password_input)
 
         buttonToDashboard.setOnClickListener {
+            loadDashboard()
+
+            /**
             if(!userText.text.toString().equals(UserSingleton.user.email) && pwText.text.toString().equals(UserSingleton.user.password)) {
-                loadDashboard()
+
+            } else {
+                Tools.exceptionToast(getApplicationContext(), "Benutzername oder Passwort falsch");
             }
+            **/
         }
 
         var buttonToImprintLogin: TextView = findViewById(R.id.textView_to_imprintlogin)
@@ -107,14 +114,28 @@ class MainActivity : ComponentActivity() {
         setContentView(R.layout.register_1)
 
         var email: EditText = findViewById(R.id.login_email_input)
-        var pw: EditText = findViewById(R.id.login_password_input)
+        var pw: EditText = findViewById(R.id.login_password_input1)
+        var pwConfirm: EditText = findViewById(R.id.login_password_input2)
 
         var buttonToRegister2: Button = findViewById(R.id.button_to_register2)
 
         buttonToRegister2.setOnClickListener {
-            UserSingleton.setUserEmail(email.text.toString())
-            UserSingleton.setUserPassword(pw.text.toString())
-            loadRegister2()
+            if(email.text.toString().contains("@")) {
+                if(pw.text.toString().equals(pwConfirm.text.toString())) {
+                    if(pw.text.toString().length >= 12) {
+                        UserSingleton.setUserEmail(email.text.toString())
+                        UserSingleton.setUserPassword(pw.text.toString())
+                        loadRegister2()
+                    } else {
+                        Tools.exceptionToast(getApplicationContext(), "Passwort benötigt mindestens 12 Zeichen")
+                    }
+                } else {
+                    Tools.exceptionToast(getApplicationContext(), "Passwörter stimmen nicht überein");
+                }
+            } else {
+                Tools.exceptionToast(getApplicationContext(), "Gib eine valide Email an");
+            }
+
         }
     }
 
@@ -134,11 +155,17 @@ class MainActivity : ComponentActivity() {
         }
 
         buttonToRegister3.setOnClickListener {
-            if(checkBoxToAGB.isChecked){
-                UserSingleton.setUserSurname(firstname.text.toString())
-                UserSingleton.setUserLastname(lastname.text.toString())
-                UserSingleton.setUserIban(iban.text.toString())
-                loadRegister3()
+            if(checkBoxToAGB.isChecked) {
+                if(iban.text.toString().matches("^[DE]{2}([0-9a-zA-Z]{20})\$".toRegex()) || !firstname.text.toString().equals("") || !lastname.text.toString().equals("")) {
+                    UserSingleton.setUserSurname(firstname.text.toString())
+                    UserSingleton.setUserLastname(lastname.text.toString())
+                    UserSingleton.setUserIban(iban.text.toString())
+                    loadRegister3()
+                } else {
+                    Tools.exceptionToast(getApplicationContext(), "Eingaben nicht korrekt");
+                }
+            } else {
+                Tools.exceptionToast(getApplicationContext(), "Stimme unseren AGB's zu, um fortzufahren");
             }
         }
     }
@@ -416,10 +443,15 @@ class MainActivity : ComponentActivity() {
         var claimButton: Button = findViewById(R.id.botton_to_claim)
         var dashboardButton: Button = findViewById(R.id.button_to_dashboard)
         var submitButton: Button = findViewById(R.id.button_to_submit)
+        var imprint: TextView = findViewById(R.id.button_to_imprint)
 
         var userTextVorname: EditText = findViewById(R.id.surname_input)
         var userTextNachname: EditText = findViewById(R.id.lastname_input)
         var ibanText: EditText = findViewById(R.id.IBAN_input)
+
+        imprint.setOnClickListener {
+            loadImprintSettings()
+        }
 
         dashboardButton.setOnClickListener {
             loadDashboard()
@@ -430,9 +462,23 @@ class MainActivity : ComponentActivity() {
         }
 
         submitButton.setOnClickListener {
-            UserSingleton.setUserSurname(firstname.text.toString())
-            UserSingleton.setUserLastname(lastname.text.toString())
-            UserSingleton.setUserIban(iban.text.toString())
+            if(ibanText.text.toString().matches("^[DE]{2}([0-9a-zA-Z]{20})\$".toRegex()) || !userTextVorname.text.toString().equals("") || !userTextNachname.text.toString().equals("")) {
+                UserSingleton.setUserSurname(firstname.text.toString())
+                UserSingleton.setUserLastname(lastname.text.toString())
+                UserSingleton.setUserIban(iban.text.toString())
+                loadRegister3()
+            } else {
+                Tools.exceptionToast(getApplicationContext(), "Eingaben nicht korrekt");
+            }
+            loadSettings()
+        }
+    }
+
+    private fun loadImprintSettings() {
+        setContentView(R.layout.imprint)
+        var buttonToLogin: Button = findViewById(R.id.button_to_settings)
+
+        buttonToLogin.setOnClickListener {
             loadSettings()
         }
     }
