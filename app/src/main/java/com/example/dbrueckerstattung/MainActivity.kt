@@ -74,7 +74,7 @@ class MainActivity : ComponentActivity() {
 
         //Validierung ob der Login korrekt ist
         buttonToDashboard.setOnClickListener {
-            if(!userText.text.toString().equals(UserSingleton.user.email) || pwText.text.toString().equals(UserSingleton.user.password)) {
+            if(userText.text.toString().equals(UserSingleton.user.email) && pwText.text.toString().equals(UserSingleton.user.password)) {
                 loadDashboard()
             } else {
                 Tools.exceptionToast(getApplicationContext(), "Benutzername oder Passwort falsch");
@@ -218,7 +218,7 @@ class MainActivity : ComponentActivity() {
         val statistik_textView = findViewById<TextView>(R.id.statistiken_text)
 
         //Datenbankzugriff für alle Rückerstattungen
-        val list: List<Daten> = db?.datenDao()?.loadAllPersons() ?: emptyList()
+        val list: List<Daten> = db?.datenDao()?.loadAllDaten() ?: emptyList()
 
         //Aufsummierung der Beiträge, die rückerstattet werden
         val refundedSum = list.sumOf { it.betrag }
