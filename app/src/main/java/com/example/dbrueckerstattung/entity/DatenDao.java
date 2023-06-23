@@ -1,4 +1,4 @@
-package com.example.dbrueckerstattung;
+package com.example.dbrueckerstattung.entity;
 
 
 import androidx.room.Dao;
@@ -6,6 +6,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import com.example.dbrueckerstattung.entity.Daten;
 
 import java.util.List;
 
