@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.widget.doAfterTextChanged
 import com.example.dbrueckerstattung.database.AppDatabase
 import com.example.dbrueckerstattung.entity.Daten
+import com.example.dbrueckerstattung.entity.UserSingleton
 import com.example.dbrueckerstattung.ui.theme.DBRueckerstattungTheme
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
@@ -104,15 +105,26 @@ class MainActivity : ComponentActivity() {
 
     private fun loadRegister1() {
         setContentView(R.layout.register_1)
+
+        var email: EditText = findViewById(R.id.login_email_input)
+        var pw: EditText = findViewById(R.id.login_password_input)
+
         var buttonToRegister2: Button = findViewById(R.id.button_to_register2)
 
         buttonToRegister2.setOnClickListener {
+            UserSingleton.setUserEmail(email.text.toString())
+            UserSingleton.setUserPassword(pw.text.toString())
             loadRegister2()
         }
     }
 
     private fun loadRegister2() {
         setContentView(R.layout.register_2)
+
+        var firstname: EditText = findViewById(R.id.login_firstname_input)
+        var lastname: EditText = findViewById(R.id.login_lastname_input)
+        var iban: EditText = findViewById(R.id.login_iban_input)
+
         var checkBoxToAGB: CheckBox = findViewById(R.id.AGB)
         var agbText: TextView = findViewById(R.id.agb_text)
         var buttonToRegister3: Button = findViewById(R.id.button_to_register3)
@@ -123,6 +135,9 @@ class MainActivity : ComponentActivity() {
 
         buttonToRegister3.setOnClickListener {
             if(checkBoxToAGB.isChecked){
+                UserSingleton.setUserSurname(firstname.text.toString())
+                UserSingleton.setUserLastname(lastname.text.toString())
+                UserSingleton.setUserIban(iban.text.toString())
                 loadRegister3()
             }
         }
@@ -388,10 +403,15 @@ class MainActivity : ComponentActivity() {
         }
     }
     private fun loadSettings() {
-
-
-
         setContentView(R.layout.settings)
+
+        var firstname: EditText = findViewById(R.id.surname_input)
+        var lastname: EditText = findViewById(R.id.lastname_input)
+        var iban: EditText = findViewById(R.id.IBAN_input)
+
+        firstname.setText(UserSingleton.user.surname)
+        lastname.setText(UserSingleton.user.lastname)
+        iban.setText(UserSingleton.user.iban)
 
         var claimButton: Button = findViewById(R.id.botton_to_claim)
         var dashboardButton: Button = findViewById(R.id.button_to_dashboard)
