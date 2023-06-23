@@ -1,5 +1,6 @@
 package com.example.dbrueckerstattung.entity
 
+//Userdaten
 class User(
     var email: String? = "",
     var password: String? = "",

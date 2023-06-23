@@ -3,6 +3,7 @@ package com.example.dbrueckerstattung.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+//Datenklasse für die Rückerstattungen
 @Entity(tableName = "daten")
 data class Daten(
     @PrimaryKey(autoGenerate = true)

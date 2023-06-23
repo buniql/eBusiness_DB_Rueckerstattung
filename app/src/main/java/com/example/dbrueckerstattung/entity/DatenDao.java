@@ -11,6 +11,7 @@ import com.example.dbrueckerstattung.entity.Daten;
 
 import java.util.List;
 
+//DataAccessObject für die Daten aus der DB für die Rückerstattungen
 @Dao
 public interface DatenDao {
 

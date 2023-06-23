@@ -1,5 +1,6 @@
 package com.example.dbrueckerstattung.entity
 
+//Singeltonobjekt für Userdaten
 object UserSingleton {
     var user: User = User()
         private set
