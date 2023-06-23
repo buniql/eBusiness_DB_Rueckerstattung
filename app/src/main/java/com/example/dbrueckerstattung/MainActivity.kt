@@ -1,6 +1,7 @@
 package com.example.dbrueckerstattung
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -71,15 +72,11 @@ class MainActivity : ComponentActivity() {
         var pwText: EditText = findViewById(R.id.login_password_input)
 
         buttonToDashboard.setOnClickListener {
-            loadDashboard()
-
-            /**
-            if(!userText.text.toString().equals(UserSingleton.user.email) && pwText.text.toString().equals(UserSingleton.user.password)) {
-
+            if(!userText.text.toString().equals(UserSingleton.user.email) || pwText.text.toString().equals(UserSingleton.user.password)) {
+                loadDashboard()
             } else {
                 Tools.exceptionToast(getApplicationContext(), "Benutzername oder Passwort falsch");
             }
-            **/
         }
 
         var buttonToImprintLogin: TextView = findViewById(R.id.textView_to_imprintlogin)
