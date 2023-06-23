@@ -361,11 +361,12 @@ class MainActivity : ComponentActivity() {
                 }
             } else {
                 list.forEach {
-                    if (it.von.contains(currentSearchString, ignoreCase = true) || it.nach.contains(currentSearchString, ignoreCase = true))
-                    refund_textView.append(
-                        "Auftrag ${it.id}\n Von: ${it.von} Nach: ${it.nach} \n Datum: ${it.datum} \n" +
-                                " Status: ${it.status}\n Betrag: ${it.betrag}€ \n\n"
-                    )
+                    if (it.von.contains(currentSearchString, ignoreCase = true) || it.nach.contains(currentSearchString, ignoreCase = true)) {
+                        refund_textView.append(
+                            "Auftrag ${it.id}\n Von: ${it.von} Nach: ${it.nach} \n Datum: ${it.datum} \n" +
+                                    " Status: ${it.status}\n Betrag: ${it.betrag}€ \n\n"
+                        )
+                    }
                 }
             }
 
