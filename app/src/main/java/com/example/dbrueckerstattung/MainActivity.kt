@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity() {
         var pwText: EditText = findViewById(R.id.login_password_input)
 
         buttonToDashboard.setOnClickListener {
-            if(!userText.text.toString().equals("E-Mail") && pwText.text.toString().equals("p")) {
+            if(!userText.text.toString().equals(UserSingleton.user.email) && pwText.text.toString().equals(UserSingleton.user.password)) {
                 loadDashboard()
             }
         }
