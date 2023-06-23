@@ -1,7 +1,6 @@
 package com.example.dbrueckerstattung
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -213,7 +212,7 @@ class MainActivity : ComponentActivity() {
         val status_textView = findViewById<TextView>(R.id.statuseinträge)
         val statistik_textView = findViewById<TextView>(R.id.statistiken_text)
 
-        val list: List<Daten> = db?.datenDao()?.loadAllPersons() ?: emptyList()
+        val list: List<Daten> = db?.datenDao()?.loadAllDaten() ?: emptyList()
 
         //Aufsummierung der Beträge, die rückerstattet werden
         val refundedSum = list.sumOf { it.betrag }
