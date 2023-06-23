@@ -26,4 +26,7 @@ public interface DatenDao {
 
     @Query("SELECT * FROM DATEN WHERE id = :id")
     Daten loadPersonById(int id);
+
+    @Query("DELETE FROM DATEN")
+    void clearData();
 }

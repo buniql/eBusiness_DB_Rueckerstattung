@@ -26,6 +26,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         db = AppDatabase.getInstance(applicationContext)
+        db?.datenDao()?.clearData()
 
         //Daten werden aus der CSV-Datei ausgelesen
         val minput = InputStreamReader(assets.open("db.csv"))
@@ -35,7 +36,7 @@ class MainActivity : ComponentActivity() {
             CSVFormat.DEFAULT
         )
 
-        var count: Int = 1;
+        var count: Int = 0;
         //Datenbank Migration
         csvParser.forEach { record ->
             val von = record.get(1)
