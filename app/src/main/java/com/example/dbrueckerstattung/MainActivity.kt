@@ -426,6 +426,9 @@ class MainActivity : ComponentActivity() {
         }
 
         submitButton.setOnClickListener {
+            UserSingleton.setUserSurname(firstname.text.toString())
+            UserSingleton.setUserLastname(lastname.text.toString())
+            UserSingleton.setUserIban(iban.text.toString())
             loadSettings()
         }
     }
