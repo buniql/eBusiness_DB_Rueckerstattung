@@ -20,8 +20,39 @@ import java.io.InputStreamReader
 
 
 class MainActivity : ComponentActivity() {
+
+    private var db: AppDatabase? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        db = AppDatabase.getInstance(applicationContext)
+
+        //Daten werden aus der CSV-Datei ausgelesen
+        val minput = InputStreamReader(assets.open("db.csv"))
+        val reader = BufferedReader(minput)
+        val csvParser = CSVParser.parse(
+            reader,
+            CSVFormat.DEFAULT
+        )
+
+        var count: Int = 1;
+        //Datenbank Migration
+        csvParser.forEach { record ->
+            val von = record.get(1)
+            val nach = record.get(2)
+            val datum = record.get(3)
+            val status = record.get(4)
+            val verspeatung = record.get(5)
+            val betrag = record.get(6).toDoubleOrNull()
+
+            if (verspeatung != null && betrag != null) {
+                val daten = Daten(count, von, nach, datum, status, verspeatung, betrag)
+                db?.datenDao()?.insertDaten(daten)
+            }
+
+            count++;
+        }
+
         loadLogin()
     }
 
@@ -140,30 +171,7 @@ class MainActivity : ComponentActivity() {
         val status_textView = findViewById<TextView>(R.id.statuseinträge)
         val statistik_textView = findViewById<TextView>(R.id.statistiken_text)
 
-        //Daten werden aus der CSV-Datei ausgelesen
-        val minput = InputStreamReader(assets.open("db.csv"))
-        val reader = BufferedReader(minput)
-        val csvParser = CSVParser.parse(
-            reader,
-            CSVFormat.DEFAULT
-        )
-        val list= mutableListOf<daten>()
-
-        //Daten werden in der Data Class daten abgespeichert
-        csvParser.forEach { record ->
-            val id = record.get(0)
-            val von = record.get(1)
-            val nach = record.get(2)
-            val datum = record.get(3)
-            val status = record.get(4)
-            val verspeatung = record.get(5)
-            val betrag = record.get(6).toDoubleOrNull()
-
-            if (id != null && verspeatung != null && betrag != null) {
-                val daten = daten(id, von, nach, datum, status, verspeatung, betrag)
-                list.add(daten)
-            }
-        }
+        val list: List<Daten> = db?.datenDao()?.loadAllPersons() ?: emptyList()
 
         //Aufsummierung der Beträge, die rückerstattet werden
         val refundedSum = list.sumOf { it.betrag }
@@ -249,7 +257,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun loadDetailedList(list:List<daten>){
+    private fun loadDetailedList(list:List<Daten>){
         setContentView(R.layout.refundlist)
 
         var dashboardButton: Button = findViewById(R.id.button_to_dashboard)
@@ -263,7 +271,7 @@ class MainActivity : ComponentActivity() {
         var currentSearchString: String = ""
         var currentCheckBoxState: Boolean = false
 
-        var sortedList: List<daten>
+        var sortedList: List<Daten>
 
         list.forEach {
             refund_textView.append(
@@ -289,7 +297,7 @@ class MainActivity : ComponentActivity() {
             refund_textView.setText("");
 
             if(sortByDateButton.text.equals("Datum ASC")) {
-                sortedList = list.sortedWith(compareByDescending<daten> { it.datum.substring(6, 10) }
+                sortedList = list.sortedWith(compareByDescending<Daten> { it.datum.substring(6, 10) }
                     .thenBy { it.datum.substring(3, 5) }
                     .thenBy { it.datum.substring(0, 2) }
                 )
@@ -303,7 +311,7 @@ class MainActivity : ComponentActivity() {
                 }
                 sortByDateButton.setText("Datum DSC")
             } else {
-                sortedList = list.sortedWith(compareBy<daten> { it.datum.substring(6, 10) }
+                sortedList = list.sortedWith(compareBy<Daten> { it.datum.substring(6, 10) }
                     .thenBy { it.datum.substring(3, 5) }
                     .thenBy { it.datum.substring(0, 2) }
                 )

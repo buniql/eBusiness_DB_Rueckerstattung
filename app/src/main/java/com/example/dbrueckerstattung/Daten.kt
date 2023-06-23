@@ -1,8 +1,12 @@
 package com.example.dbrueckerstattung
 
-//data class für csv datei
-data class daten(
-    val id: String,
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "daten")
+data class Daten(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
     val von: String,
     val nach: String,
     val datum: String,
